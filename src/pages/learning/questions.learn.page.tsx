@@ -1,6 +1,7 @@
 import { Button, Pagination, Paper, Radio, Select, Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
+import { LoadingPage } from '../loading.page';
 
 type Category = {
   id: number;
@@ -10,16 +11,16 @@ type Category = {
 
 type Question = {
   id: number;
-  q: string;
+  question: string;
   a: string;
   b: string;
   c: string;
-  s: string;
+  solution: string;
 };
 
 export function QuestionsLearnPage() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [category, setCategory] = useState<number | null>(null);
+  const [category, setCategory] = useState<number>(0);
   const [answere, setAnswere] = useState<string | null>(null);
   const [showResult, setShowResult] = useState<boolean>(false);
 
@@ -28,7 +29,7 @@ export function QuestionsLearnPage() {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch('https://raw.githubusercontent.com/IngressoDev/fishexam/refs/heads/master/data/questions.json', { method: 'GET' });
+      const res = await fetch('https://raw.githubusercontent.com/dawosch/fishexam/refs/heads/main/data/questions.json', { method: 'GET' });
       const data = await res.json();
       return data;
     };
@@ -46,17 +47,19 @@ export function QuestionsLearnPage() {
     handlePageChange(page + 1);
   };
 
-  const previousPage = () => {
-    resetStates();
-    handlePageChange(page - 1);
+  const nextCategory = () => {
+    setCategory((c) => c + 1);
+    handlePageChange(1);
   };
 
-  const handleCategoryChange = (value: number | null) => {
+  const handleCategoryChange = (value: number) => {
     resetStates();
     setCategory(value);
+    handlePageChange(1);
   };
 
   const handleAnswereChange = (value: string) => {
+    resetStates();
     setAnswere(value);
   };
 
@@ -71,7 +74,7 @@ export function QuestionsLearnPage() {
   const getRadioColor = (value: string) => {
     if (category === null || !showResult) return undefined;
 
-    const correctAnswere = categories[category].questions[page].s;
+    const correctAnswere = categories[category].questions[page].solution;
     if (answere === value && answere === correctAnswere) return 'green';
     if (answere === value && answere !== correctAnswere) return 'red';
     if (value === correctAnswere) return 'green';
@@ -79,13 +82,21 @@ export function QuestionsLearnPage() {
     return undefined;
   };
 
+  if (categories.length === 0) return <LoadingPage />;
+
   return (
     <Stack>
-      <Select label="Wähle die Kategorie" placeholder="Kategorie" data={categories.map((c, i) => ({ label: c.name, value: i }))} value={category} onChange={handleCategoryChange} />
+      <Select
+        label="Wähle die Kategorie"
+        placeholder="Kategorie"
+        data={categories.map((c, i) => ({ label: c.name, value: i }))}
+        value={category}
+        onChange={(val) => handleCategoryChange(val ?? 0)}
+      />
       {category !== null && (
         <>
           <Paper shadow="xs" p="md">
-            <Radio.Group label={categories[category].questions[page].q} value={answere} onChange={handleAnswereChange} readOnly={showResult}>
+            <Radio.Group label={categories[category].questions[page].question} value={answere} onChange={handleAnswereChange} readOnly={showResult}>
               <Stack gap={5} pt={5}>
                 <Radio value="a" label={categories[category].questions[page].a} color={getRadioColor('a')} styles={{ label: { color: getRadioColor('a') } }} />
                 <Radio value="b" label={categories[category].questions[page].b} color={getRadioColor('b')} styles={{ label: { color: getRadioColor('b') } }} />
@@ -98,24 +109,17 @@ export function QuestionsLearnPage() {
               Validieren
             </Button>
           )}
-          {showResult && (
-            <>
-              <Button onClick={nextPage} fullWidth>
-                Weiter
-              </Button>
-              <Button onClick={previousPage} fullWidth>
-                Zurück
-              </Button>
-            </>
+          {showResult && page < categories[category].questions.length - 1 && (
+            <Button onClick={nextPage} fullWidth>
+              Weiter
+            </Button>
           )}
-          <Pagination
-            value={page}
-            total={categories[category].questions.length}
-            boundaries={3}
-            siblings={3}
-            onChange={handlePageChange}
-            style={{ display: 'flex', justifyContent: 'center' }}
-          />
+          {page === categories[category].questions.length - 1 && (
+            <Button onClick={nextCategory} fullWidth>
+              Nächste Kategorie
+            </Button>
+          )}
+          <Pagination value={page} total={categories[category].questions.length - 1} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
         </>
       )}
     </Stack>

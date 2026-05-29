@@ -1,7 +1,7 @@
-import { Stack, Select, Paper, Radio, Button, Pagination, Image, Autocomplete } from '@mantine/core';
+import { HandThumbDownIcon, HandThumbUpIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+import { ActionIcon, Autocomplete, Button, Image, Pagination, Paper, Popover, Stack, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import { HandThumbUpIcon, HandThumbDownIcon } from '@heroicons/react/24/outline';
 
 type Fish = {
   id: number;
@@ -22,7 +22,7 @@ export function FishLearnPage() {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch('https://raw.githubusercontent.com/IngressoDev/fishexam/refs/heads/master/data/fishes.json', { method: 'GET' });
+      const res = await fetch('https://raw.githubusercontent.com/dawosch/fishexam/refs/heads/main/data/fishes.json', { method: 'GET' });
       const data: Fish[] = await res.json();
       return data;
     };
@@ -59,16 +59,31 @@ export function FishLearnPage() {
         <>
           <Pagination value={page} total={fishes.length} boundaries={3} siblings={3} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
           <Paper shadow="xs" p="md">
-            <Image src={`https://raw.githubusercontent.com/IngressoDev/fishexam/refs/heads/v2/data/images/${fishes[page - 1].image}`} />
-            <Autocomplete
-              label="Deine Antwort"
-              value={answere ?? ''}
-              data={fishes.map((f) => f.name)}
-              rightSection={
-                showResult ? fishes[page - 1].name === answere ? <HandThumbUpIcon width={24} color="green" /> : <HandThumbDownIcon width={24} color="green" /> : undefined
-              }
-              onChange={setAnswere}
-            />
+            <Popover width={200} position="bottom" withArrow shadow="md">
+              <Popover.Target>
+                <ActionIcon variant="default" style={{ display: 'flex', justifySelf: 'end' }}>
+                  <InformationCircleIcon width={24} />
+                </ActionIcon>
+              </Popover.Target>
+              <Popover.Dropdown>
+                <Text size="xs">Die angezeigten Bilder sind nicht die offiziellen Prüfungsbilder</Text>
+              </Popover.Dropdown>
+            </Popover>
+            <Stack>
+              <Image src={`https://raw.githubusercontent.com/dawosch/fishexam/refs/heads/main/data/images/${fishes[page - 1].id}.png`} fit="contain" height={400} />
+              <Text size="xl" fw="500" style={{ display: 'flex', justifyContent: 'center' }}>
+                {fishes[page - 1].size} cm
+              </Text>
+              <Autocomplete
+                placeholder="Wähle deine Antwort"
+                value={answere ?? ''}
+                data={fishes.map((f) => f.name).sort()}
+                rightSection={
+                  showResult ? fishes[page - 1].name === answere ? <HandThumbUpIcon width={24} color="green" /> : <HandThumbDownIcon width={24} color="red" /> : undefined
+                }
+                onChange={setAnswere}
+              />
+            </Stack>
           </Paper>
           {!showResult && (
             <Button onClick={validate} fullWidth>
@@ -77,12 +92,16 @@ export function FishLearnPage() {
           )}
           {showResult && (
             <>
-              <Button onClick={nextPage} fullWidth>
-                Weiter
-              </Button>
-              <Button onClick={previousPage} fullWidth>
-                Zurück
-              </Button>
+              {page !== fishes.length && (
+                <Button onClick={nextPage} fullWidth>
+                  Weiter
+                </Button>
+              )}
+              {page !== 1 && (
+                <Button onClick={previousPage} fullWidth>
+                  Zurück
+                </Button>
+              )}
             </>
           )}
         </>

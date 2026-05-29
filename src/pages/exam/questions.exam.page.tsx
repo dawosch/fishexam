@@ -1,7 +1,8 @@
-import { Button, Flex, Loader, Modal, Stack, Text, Title } from '@mantine/core';
+import { Box, Button, Flex, Modal, Stack, Text, Title } from '@mantine/core';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { QuestionBlock } from '~/components/question-block.component';
 import { useTimer } from '~/hooks/timer.hook';
+import { LoadingPage } from '../loading.page';
 
 type Category = {
   id: number;
@@ -11,24 +12,28 @@ type Category = {
 
 type Question = {
   id: number;
-  q: string;
+  question: string;
   a: string;
   b: string;
   c: string;
-  s: string;
+  solution: string;
 };
 
 export function QuestionsExamPage() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const { startTimer, stopTimer } = useTimer();
+  const { time, initTimer, startTimer, stopTimer, formateTime } = useTimer();
   const [showResults, setShowResults] = useState<boolean>(false);
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [results, setResults] = useState<Map<number, number>>(new Map());
   const answeres = useRef<Map<number, Map<number, boolean>>>(new Map<number, Map<number, boolean>>());
 
   useEffect(() => {
+    initTimer(3600);
+  }, [initTimer]);
+
+  useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch('https://raw.githubusercontent.com/IngressoDev/fishexam/refs/heads/master/data/questions.json', { method: 'GET' });
+      const res = await fetch('https://raw.githubusercontent.com/dawosch/fishexam/refs/heads/main/data/questions.json', { method: 'GET' });
       const data: Category[] = await res.json();
       const categories = data.map((c) => ({
         ...c,
@@ -64,7 +69,7 @@ export function QuestionsExamPage() {
     return results.size !== 0 && resultArr.every((total) => total >= 6) && resultArr.reduce((total, cur) => total + cur, 0) >= 45;
   };
 
-  if (categories.length === 0) return <Loader color="blue" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />;
+  if (categories.length === 0) return <LoadingPage />;
   return (
     <>
       <Stack>
@@ -76,11 +81,11 @@ export function QuestionsExamPage() {
             {c.questions.map((q) => (
               <QuestionBlock
                 key={`c-${c.id}:q-${q.id}`}
-                question={q.q}
+                question={q.question}
                 answereA={q.a}
                 answereB={q.b}
                 answereC={q.c}
-                solution={q.s}
+                solution={q.solution}
                 reveal={showResults}
                 onChange={(result) => handleChange(c.id, q.id, result)}
               />
@@ -88,6 +93,11 @@ export function QuestionsExamPage() {
           </Fragment>
         ))}
         <Button onClick={handleFinish}>Prüfung abgeben</Button>
+        <Box bg="dark" style={{ position: 'sticky', bottom: 0, height: 50, justifyContent: 'center', alignItems: 'center', borderRadius: 5 }} display="flex">
+          <Text c="white" size="lg">
+            Abgabe in: {formateTime(time)}
+          </Text>
+        </Box>
       </Stack>
       <Modal.Root opened={showDialog} onClose={() => setShowDialog(false)} centered>
         <Modal.Overlay />
