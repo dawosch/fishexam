@@ -1,0 +1,442 @@
+[
+  {
+    "id": 1,
+    "name": "Bachforelle",
+    "sience": "Salmo trutta fario",
+    "info": ["Körper torpedoförmig", "Rückenfärbung olivgrün", "Fettflosse ohne Flossenstrahlen"],
+    "image": "bachforelle.jpg",
+    "size": "20-35",
+    "copyright": ""
+  },
+  {
+    "id": 2,
+    "name": "Meerforelle",
+    "sience": "Salmo trutta trutta",
+    "info": ["Körper torpedoförmig", "Mundspalte reicht bis hinter das Auge", "relativ kleine Schuppen", "Seiten grausilbern, Rücken graugrün"],
+    "image": "meerforelle.jpg",
+    "size": "60",
+    "copyright": ""
+  },
+  {
+    "id": 3,
+    "name": "Lachs",
+    "sience": "Salmo salar",
+    "info": ["Schwanzflosse etwas konkav ausgebuchtet", "Rücken- und Bauchflossen etwa in Körpermitte"],
+    "image": "lachs.jpg",
+    "size": "80-100",
+    "copyright": ""
+  },
+  {
+    "id": 4,
+    "name": "Regenbogenforelle",
+    "sience": "Oncorhynchus mykiss",
+    "info": ["Flanken haben mehr oder weniger breites, rötlich schillerndes Längsband", "Bauchseite ist weißlich"],
+    "image": "regenbogenforelle.jpg",
+    "size": "35-50",
+    "copyright": ""
+  },
+  {
+    "id": 5,
+    "name": "Bachsaibling",
+    "sience": "Salvelinus fontinalis",
+    "info": [
+      "lang gestreckte, nach vorn deutlich zugespitzte Körpergestalt mit hohem Schwanzstiel",
+      "roßer Kopf mit sehr tiefer Mundspalte",
+      "das Maul ist leicht oberständig",
+      "sehr kleine Schuppen"
+    ],
+    "image": "bachsaibling.jpg",
+    "size": "55",
+    "copyright": ""
+  },
+  {
+    "id": 6,
+    "name": "Äsche",
+    "sience": "Thymallus thymallus",
+    "info": [
+      "langgestreckter und stromlinienförmiger Körperbau",
+      "Körperflanken sind silbrig gefärbt mit perlmuttartigem Schimmer",
+      "Rücken ist dunkel grau-grün mit noch dunkleren parallel verlaufenden Strichen",
+      "sehr hohe Rückenflosse (Äschenfahne) mit 5 bis 8 dunklen, teilweise unterbrochenen, Streifen"
+    ],
+    "image": "aesche.jpg",
+    "size": "35-40",
+    "copyright": ""
+  },
+  {
+    "id": 7,
+    "name": "Hecht",
+    "sience": "Esox lucius",
+    "info": [
+      "lang gestreckter Körper, der im Querschnitt fast rund (walzenförmig) ist",
+      "Bauch ist etwas abgeplattet",
+      "Kopf ist sehr lang, seine Schnauze schnabelartig ausgezogen",
+      "Maul ist oberständig, der Unterkiefer steht hervor",
+      "Rückenflosse ist weit nach hinten verlagert, nah an der Schwanzflosse"
+    ],
+    "image": "hecht.jpg",
+    "size": "100-150",
+    "copyright": ""
+  },
+  {
+    "id": 8,
+    "name": "Aal",
+    "sience": "Anguilla anguilla",
+    "info": [
+      "Körperform ähnelt einer Schlange: langgestreckt, rundlich. Am Körperende flacht er seitlich etwas ab",
+      "Rückenflosse, Schwanzflosse und Afterflosse sind zusammengewachsen und bilden einen einheitlichen Flossensaum",
+      "das Maul ist oberständig"
+    ],
+    "image": "aal.jpg",
+    "size": "60-150",
+    "copyright": ""
+  },
+  {
+    "id": 9,
+    "name": "Zährte",
+    "sience": "Vimba vimba",
+    "info": [
+      "Körperflanken sind silbrig glänzend und zeigen oft einen leicht rötlichen Schimmer",
+      "Bauchseite ist weißlich bis schwach gelblich-orange gefärbt",
+      "der Kopf ist ziemlich lang",
+      "die Schnauze ist kegelförmig, fleischig und nasenartig vorgezogen und schwärzlich gefärbt",
+      "die Mundspalte ist unterständig und von unten gesehen wie ein Hufeisen geformt",
+      "die Rücken- und die Schwanzflosse sind schwarz bis blauschwarz gefärbt"
+    ],
+    "image": "zaehrte.jpg",
+    "size": "20-30",
+    "copyright": ""
+  },
+  {
+    "id": 10,
+    "name": "Rotauge",
+    "sience": "Rutilus rutilus",
+    "info": ["besitzt eine leuchtend rote Iris", "das Maul endständig, seine Mundspalte relativ klein", "große Rundschuppen", "die Rücken und Schwanzflosse ist grau"],
+    "image": "rotauge.jpg",
+    "size": "15-30",
+    "copyright": ""
+  },
+  {
+    "id": 11,
+    "name": "Moderlieschen",
+    "sience": "Leucaspius delineatus",
+    "info": [
+      "der Körperbau ist langgestreckt",
+      "entlang der Körperflanken verläuft ein bläulicher Längsstreifen, der manchmal nur schwach sichtbar ist",
+      "das Maul ist stark oberständig"
+    ],
+    "image": "moderlieschen.jpg",
+    "size": "6",
+    "copyright": ""
+  },
+  {
+    "id": 12,
+    "name": "Hasel",
+    "sience": "Leuciscus leuciscus",
+    "info": [
+      "mehr oder weniger lang gestreckten und annähernd drehrunden Körper",
+      "die Mundspalte ist klein (reicht nicht zum Augenvorderrand) und leicht unterständig",
+      "große Schuppen",
+      "Augen sind gelblich gefärbt"
+    ],
+    "image": "hasel.jpg",
+    "size": "15-20",
+    "copyright": ""
+  },
+  {
+    "id": 13,
+    "name": "Döbel",
+    "sience": "Leuciscus cephalus",
+    "image": "doebel.jpg",
+    "size": "30-50",
+    "copyright": ""
+  },
+  {
+    "id": 14,
+    "name": "Aland",
+    "sience": "Leuciscus idus",
+    "image": "aland.jpg",
+    "size": "30-40",
+    "copyright": ""
+  },
+  {
+    "id": 15,
+    "name": "Schneider",
+    "sience": "Alburnoides bipunctatus",
+    "image": "schneider.jpg",
+    "size": "9-12",
+    "copyright": ""
+  },
+  {
+    "id": 16,
+    "name": "Elritze",
+    "sience": "Phoxinus phoxinus",
+    "image": "elritze.jpg",
+    "size": "7-14",
+    "copyright": ""
+  },
+  {
+    "id": 17,
+    "name": "Rotfeder",
+    "sience": "Scardinius erythrophthalmus",
+    "image": "rotfeder.jpg",
+    "size": "20-30",
+    "copyright": ""
+  },
+  {
+    "id": 18,
+    "name": "Schleie",
+    "sience": "Tinca tinca",
+    "image": "schleie.jpg",
+    "size": "30-35",
+    "copyright": ""
+  },
+  {
+    "id": 19,
+    "name": "Nase",
+    "sience": "Chondrostoma nasus",
+    "image": "nase.jpg",
+    "size": "25-30",
+    "copyright": ""
+  },
+  {
+    "id": 20,
+    "name": "Gründling",
+    "sience": "Gobio gobio",
+    "image": "gruendling.jpg",
+    "size": "8-15",
+    "copyright": ""
+  },
+  {
+    "id": 21,
+    "name": "Barbe",
+    "sience": "Barbus barbus",
+    "image": "barbe.jpg",
+    "size": "30-40",
+    "copyright": ""
+  },
+  {
+    "id": 22,
+    "name": "Ukelei",
+    "sience": "Alburnus alburnus",
+    "image": "ukelei.jpg",
+    "size": "10-15",
+    "copyright": ""
+  },
+  {
+    "id": 23,
+    "name": "Güster",
+    "sience": "Blicca bjoerkna",
+    "image": "guester.jpg",
+    "size": "20",
+    "copyright": ""
+  },
+  {
+    "id": 24,
+    "name": "Brasse",
+    "sience": "Abramis brama",
+    "image": "brasse.jpg",
+    "size": "30",
+    "copyright": ""
+  },
+  {
+    "id": 25,
+    "name": "Maifisch",
+    "sience": "Alosa alosa",
+    "image": "maifisch.jpg",
+    "size": "40",
+    "copyright": ""
+  },
+  {
+    "id": 26,
+    "name": "Bitterling",
+    "sience": "Rhodeus sericeus",
+    "image": "bitterling.jpg",
+    "size": "5-9",
+    "copyright": ""
+  },
+  {
+    "id": 27,
+    "name": "Karausche",
+    "sience": "Carassius carassius",
+    "image": "karausche.png",
+    "size": "20-35",
+    "copyright": ""
+  },
+  {
+    "id": 28,
+    "name": "Giebel",
+    "sience": "Carassius gibelio",
+    "image": "giebel.jpg",
+    "size": "15-20",
+    "copyright": ""
+  },
+  {
+    "id": 29,
+    "name": "Wildkarpfen",
+    "sience": "Cyprinus carpio",
+    "image": "wildkarpfen.jpg",
+    "size": "35-80",
+    "copyright": ""
+  },
+  {
+    "id": 30,
+    "name": "Schmerle",
+    "sience": "Barbatula barbatula",
+    "image": "schmerle.png",
+    "size": "8-12",
+    "copyright": ""
+  },
+  {
+    "id": 31,
+    "name": "Schlammpeitzger",
+    "sience": "Misgurnus fossilis",
+    "image": "schlammpeitzger.jpg",
+    "size": "15-25",
+    "copyright": ""
+  },
+  {
+    "id": 32,
+    "name": "Steinbeißer",
+    "sience": "Cobitis taenia",
+    "image": "steinbeisser.jpg",
+    "size": "9,5-13,5",
+    "copyright": ""
+  },
+  {
+    "id": 33,
+    "name": "Wels",
+    "sience": "Silurus glanis",
+    "image": "wels.jpg",
+    "size": "60-150",
+    "copyright": ""
+  },
+  {
+    "id": 34,
+    "name": "Kessler-Grundel",
+    "sience": "Ponticola kessleri",
+    "image": "kessler-grundel.jpg",
+    "size": "18-22",
+    "copyright": ""
+  },
+  {
+    "id": 35,
+    "name": "Quappe",
+    "sience": "Lota lota",
+    "image": "quappe.jpg",
+    "size": "30-60",
+    "copyright": ""
+  },
+  {
+    "id": 36,
+    "name": "Flussbarsch",
+    "sience": "Perca fluviatilis",
+    "image": "flussbarsch.jpg",
+    "size": "15-30",
+    "copyright": ""
+  },
+  {
+    "id": 37,
+    "name": "Zander",
+    "sience": "Sander lucioperca",
+    "image": "zander.jpg",
+    "size": "40-70",
+    "copyright": ""
+  },
+  {
+    "id": 38,
+    "name": "Kaulbarsch",
+    "sience": "Gymnocephalus cernuus",
+    "image": "kaulbarsch.jpg",
+    "size": "12-15",
+    "copyright": ""
+  },
+  {
+    "id": 39,
+    "name": "Mühlkoppe (Groppe)",
+    "sience": "Cottus gobio",
+    "image": "muehlkoppe.jpg",
+    "size": "8-10",
+    "copyright": ""
+  },
+  {
+    "id": 40,
+    "name": "Dreistachliger Stichling",
+    "sience": "Gasterosteus aculeatus",
+    "image": "dreistachliger-stichling.jpg",
+    "size": "5-8",
+    "copyright": ""
+  },
+  {
+    "id": 41,
+    "name": "Zwergstichling",
+    "sience": "Pungitius pungitius",
+    "image": "zwergstichling.jpg",
+    "size": "5-7",
+    "copyright": ""
+  },
+  {
+    "id": 42,
+    "name": "Bach-/Flussneunauge",
+    "sience": "Lampetra spec.",
+    "image": "bach-flussneunauge.jpg",
+    "size": "10-16, 30-40",
+    "copyright": ""
+  },
+  {
+    "id": 43,
+    "name": "Rapfen",
+    "sience": "Aspius aspius",
+    "image": "rapfen.jpg",
+    "size": "50-60",
+    "copyright": ""
+  },
+  {
+    "id": 44,
+    "name": "Makrele",
+    "sience": "Scomber scombrus",
+    "image": "makrele.jpg",
+    "size": "30",
+    "copyright": ""
+  },
+  {
+    "id": 45,
+    "name": "Flunder",
+    "sience": "Platichthys flesus",
+    "image": "flunder.jpg",
+    "size": "30-40",
+    "copyright": ""
+  },
+  {
+    "id": 46,
+    "name": "Kabeljau (Dorsch)",
+    "sience": "Gadus morhua",
+    "image": "kabeljau.jpg",
+    "size": "60-80",
+    "copyright": ""
+  },
+  {
+    "id": 47,
+    "name": "Nordseeschnäpel",
+    "sience": "Coregonus oxyrinchus",
+    "image": "nordseeschnaepel.jpg",
+    "size": "50-70",
+    "copyright": ""
+  },
+  {
+    "id": 48,
+    "name": "Edelkrebs",
+    "sience": "Astacus astacus",
+    "image": "edelkrebs.jpg",
+    "size": "20",
+    "copyright": ""
+  },
+  {
+    "id": 49,
+    "name": "Amerikanischer Krebs",
+    "sience": "Orconectes limosus",
+    "image": "amerikanischer-krebs.jpg",
+    "size": "12",
+    "copyright": ""
+  }
+]
