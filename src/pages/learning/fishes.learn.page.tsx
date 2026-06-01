@@ -57,7 +57,7 @@ export function FishLearnPage() {
     <Stack>
       {!!fishes && (
         <>
-          <Pagination value={page} total={fishes.length} boundaries={3} siblings={3} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
+          <Pagination value={page} total={fishes.length} gap={4} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
           <Paper shadow="xs" p="md">
             <Popover width={200} position="bottom" withArrow shadow="md">
               <Popover.Target>

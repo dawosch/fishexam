@@ -1,6 +1,9 @@
-import { HandThumbDownIcon, HandThumbUpIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
-import { ActionIcon, Autocomplete, Button, Flex, Image, Modal, Pagination, Paper, Popover, Stack, Text, Title } from '@mantine/core';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { ActionIcon, Autocomplete, Button, Image, Pagination, Paper, Popover, Stack, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { LoadingPage } from '../loading.page';
+import { FishResults } from './fish-results.exam';
 
 type Fish = {
   id: number;
@@ -19,6 +22,7 @@ export function FishExamPage() {
   const [answeres, setAnsweres] = useState<string[]>([]);
   const [results, setResults] = useState<boolean[]>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFishes = async () => {
@@ -49,56 +53,40 @@ export function FishExamPage() {
     setShowResults(true);
   };
 
+  const handleNewExam = () => {
+    navigate(0);
+  };
+
+  if (!fishes.length) return <LoadingPage />;
+  if (showResults) return <FishResults fishes={fishes.map((f) => f.name)} results={results} onBack={() => setShowResults(false)} onNewExam={handleNewExam} />;
+
   return (
     <Stack>
-      {fishes.length && (
-        <>
-          <Pagination value={fishNumber + 1} total={fishes.length} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
+      <Pagination value={fishNumber + 1} total={fishes.length} gap={4} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
 
-          <Paper shadow="xs" p="md">
-            <Popover width={200} position="bottom" withArrow shadow="md">
-              <Popover.Target>
-                <ActionIcon variant="default" style={{ display: 'flex', justifySelf: 'end' }}>
-                  <InformationCircleIcon width={24} />
-                </ActionIcon>
-              </Popover.Target>
-              <Popover.Dropdown>
-                <Text size="xs">Die angezeigten Bilder sind nicht die offiziellen Prüfungsbilder</Text>
-              </Popover.Dropdown>
-            </Popover>
-            <Stack>
-              <Image src={`https://raw.githubusercontent.com/dawosch/fishexam/refs/heads/main/data/images/${fishes[fishNumber].id}.png`} fit="contain" />
-              <Text size="xl" fw="500" style={{ display: 'flex', justifyContent: 'center' }}>
-                {fishes[fishNumber].size} cm
-              </Text>
-              <Autocomplete placeholder="Wähle deine Antwort" value={answeres[fishNumber] ?? ''} data={fishNames} onChange={handeChange} />
-            </Stack>
-          </Paper>
+      <Paper shadow="xs" p="md">
+        <Popover width={200} position="bottom" withArrow shadow="md">
+          <Popover.Target>
+            <ActionIcon variant="default" style={{ display: 'flex', justifySelf: 'end' }}>
+              <InformationCircleIcon width={24} />
+            </ActionIcon>
+          </Popover.Target>
+          <Popover.Dropdown>
+            <Text size="xs">Die angezeigten Bilder sind nicht die offiziellen Prüfungsbilder</Text>
+          </Popover.Dropdown>
+        </Popover>
+        <Stack>
+          <Image src={`https://raw.githubusercontent.com/dawosch/fishexam/refs/heads/main/data/images/${fishes[fishNumber].id}.png`} fit="contain" />
+          <Text size="xl" fw="500" style={{ display: 'flex', justifyContent: 'center' }}>
+            {fishes[fishNumber].size} cm
+          </Text>
+          <Autocomplete placeholder="Wähle deine Antwort" value={answeres[fishNumber] ?? ''} data={fishNames} onChange={handeChange} />
+        </Stack>
+      </Paper>
 
-          <Button onClick={validate} fullWidth>
-            Ergebnis anzeigen
-          </Button>
-          <Modal.Root opened={showResults} onClose={() => setShowResults(false)} centered>
-            <Modal.Overlay />
-            <Modal.Content>
-              <Modal.Header>
-                <Modal.Title component={Title}>{results && results.filter((r) => !!r).length >= 4 ? 'Bestanden' : 'Nicht Bestanden'}</Modal.Title>
-                <Modal.CloseButton />
-              </Modal.Header>
-              <Modal.Body>
-                <Stack gap={1}>
-                  {fishes.map((f, i) => (
-                    <Flex key={`result-${f.id}`} justify="space-between">
-                      <Text>{f.name}</Text>
-                      <Text>{results[i] ? <HandThumbUpIcon width={24} color="green" /> : <HandThumbDownIcon width={24} color="red" />}</Text>
-                    </Flex>
-                  ))}
-                </Stack>
-              </Modal.Body>
-            </Modal.Content>
-          </Modal.Root>
-        </>
-      )}
+      <Button onClick={validate} fullWidth>
+        Ergebnis anzeigen
+      </Button>
     </Stack>
   );
 }

@@ -18,7 +18,7 @@ function App() {
         <Box style={{ display: 'flex', gap: 5 }}>
           <Menu shadow="md" width={200}>
             <Menu.Target>
-              <Button variant="default" rightSection={<ChevronDownIcon width={20} />}>
+              <Button variant="default" size='xs' rightSection={<ChevronDownIcon width={16} />}>
                 Lernen
               </Button>
             </Menu.Target>
@@ -34,7 +34,7 @@ function App() {
           </Menu>
           <Menu shadow="md" width={200}>
             <Menu.Target>
-              <Button variant="default" rightSection={<ChevronDownIcon width={20} />}>
+              <Button variant="default" size='xs' rightSection={<ChevronDownIcon width={16} />}>
                 Prüfung
               </Button>
             </Menu.Target>

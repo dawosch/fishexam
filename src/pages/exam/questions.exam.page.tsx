@@ -1,8 +1,10 @@
-import { Box, Button, Flex, Modal, Stack, Text, Title } from '@mantine/core';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Box, Button, Stack, Text } from '@mantine/core';
+import { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { QuestionBlock } from '~/components/question-block.component';
 import { useTimer } from '~/hooks/timer.hook';
 import { LoadingPage } from '../loading.page';
+import { QuestionResults } from './question-results.exam';
 
 type Category = {
   id: number;
@@ -23,9 +25,9 @@ export function QuestionsExamPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const { time, initTimer, startTimer, stopTimer, formateTime } = useTimer();
   const [showResults, setShowResults] = useState<boolean>(false);
-  const [showDialog, setShowDialog] = useState<boolean>(false);
-  const [results, setResults] = useState<Map<number, number>>(new Map());
-  const answeres = useRef<Map<number, Map<number, boolean>>>(new Map<number, Map<number, boolean>>());
+  const [answeres, setAnsweres] = useState<Map<number, Map<number, string>>>(new Map());
+  const [results, setResults] = useState<number[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     initTimer(3600);
@@ -45,31 +47,32 @@ export function QuestionsExamPage() {
     fetchQuestions().then(setCategories);
   }, [setCategories]);
 
-  const handleChange = (categoryId: number, questionId: number, result: boolean) => {
+  const handleChange = (categoryId: number, questionId: number, result: string) => {
     startTimer();
-    const category = answeres.current.get(categoryId) ?? new Map<number, boolean>();
-    category.set(questionId, result);
-    answeres.current.set(categoryId, category);
+    setAnsweres((answeres) => {
+      const newAnsweres = new Map(answeres);
+      const category = new Map(answeres.get(categoryId) ?? new Map<number, string>());
+      category.set(questionId, result);
+      newAnsweres.set(categoryId, category);
+      return newAnsweres;
+    });
   };
 
   const handleFinish = () => {
     stopTimer();
-    const results = new Map<number, number>();
-    answeres.current.forEach((category, key) => {
-      const total = Array.from(category.values()).reduce((total, result) => (result ? total + 1 : total), 0);
-      results.set(key, total);
-    });
+    const results = categories.map((c) => c.questions.reduce((total, q) => (answeres.get(c.id)?.get(q.id) === q.solution ? total + 1 : total), 0));
+
     setResults(results);
     setShowResults(true);
-    setShowDialog(true);
   };
 
-  const checkResults = () => {
-    const resultArr = Array.from(results.values());
-    return results.size !== 0 && resultArr.every((total) => total >= 6) && resultArr.reduce((total, cur) => total + cur, 0) >= 45;
+  const handleNewExam = () => {
+    navigate(0);
   };
 
   if (categories.length === 0) return <LoadingPage />;
+  if (showResults) return <QuestionResults categories={categories.map((c) => c.name)} results={results} onBack={() => setShowResults(false)} onNewExam={handleNewExam} />;
+
   return (
     <>
       <Stack>
@@ -86,6 +89,7 @@ export function QuestionsExamPage() {
                 answereB={q.b}
                 answereC={q.c}
                 solution={q.solution}
+                value={answeres.get(c.id)?.get(q.id)}
                 reveal={showResults}
                 onChange={(result) => handleChange(c.id, q.id, result)}
               />
@@ -99,29 +103,6 @@ export function QuestionsExamPage() {
           </Text>
         </Box>
       </Stack>
-      <Modal.Root opened={showDialog} onClose={() => setShowDialog(false)} centered>
-        <Modal.Overlay />
-        <Modal.Content>
-          <Modal.Header>
-            <Modal.Title component={Title}>{checkResults() ? 'Bestanden' : 'Nicht Bestanden'}</Modal.Title>
-            <Modal.CloseButton />
-          </Modal.Header>
-          <Modal.Body>
-            <Stack gap={1}>
-              <Flex justify="space-between">
-                <Text fw={500}>Kategorie</Text>
-                <Text fw={500}>Korrekte Antworten</Text>
-              </Flex>
-              {categories.map((c) => (
-                <Flex key={`result-${c.id}`} justify="space-between">
-                  <Text>{c.name}</Text>
-                  <Text>{results.get(c.id) ?? 0}</Text>
-                </Flex>
-              ))}
-            </Stack>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal.Root>
     </>
   );
 }

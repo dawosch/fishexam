@@ -93,6 +93,7 @@ export function QuestionsLearnPage() {
         value={category}
         onChange={(val) => handleCategoryChange(val ?? 0)}
       />
+      <Pagination value={page} total={categories[category].questions.length - 1} gap={4} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
       {category !== null && (
         <>
           <Paper shadow="xs" p="md">
@@ -119,7 +120,6 @@ export function QuestionsLearnPage() {
               Nächste Kategorie
             </Button>
           )}
-          <Pagination value={page} total={categories[category].questions.length - 1} onChange={handlePageChange} style={{ display: 'flex', justifyContent: 'center' }} />
         </>
       )}
     </Stack>

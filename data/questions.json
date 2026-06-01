@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "ALLGEMEINE FISCHKUNDE",
+    "name": "Allgemeine Fischkunde",
     "questions": [
       {
         "id": 1,
@@ -431,7 +431,7 @@
   },
   {
     "id": 2,
-    "name": "SPEZIELLE FISCHKUNDE",
+    "name": "Spezielle Fischkunde",
     "questions": [
       {
         "id": 1,
@@ -1021,7 +1021,7 @@
   },
   {
     "id": 3,
-    "name": "GEWÄSSERKUNDE UND FISCHHEGE",
+    "name": "Gewässerkunde und Fischhege",
     "questions": [
       {
         "id": 1,
@@ -1643,7 +1643,7 @@
   },
   {
     "id": 4,
-    "name": "NATUR- UND TIERSCHUTZ",
+    "name": "Natur- und Tierschutz",
     "questions": [
       {
         "id": 1,
@@ -2009,7 +2009,7 @@
   },
   {
     "id": 5,
-    "name": "GERÄTEKUNDE",
+    "name": "Gerätekunde",
     "questions": [
       {
         "id": 1,
@@ -2343,7 +2343,7 @@
   },
   {
     "id": 6,
-    "name": "GESETZESKUNDE",
+    "name": "Gesetzeskunde",
     "questions": [
       {
         "id": 1,
