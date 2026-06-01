@@ -1,4 +1,5 @@
-import { AppShell, Box, Button, Container, Menu, Text } from '@mantine/core';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { AppShell, Box, Button, Container, Menu, Text, UnstyledButton } from '@mantine/core';
 import { NavLink, Outlet } from 'react-router';
 import './App.css';
 
@@ -17,7 +18,9 @@ function App() {
         <Box style={{ display: 'flex', gap: 5 }}>
           <Menu shadow="md" width={200}>
             <Menu.Target>
-              <Button variant="default">Lernen</Button>
+              <Button variant="default" rightSection={<ChevronDownIcon width={20} />}>
+                Lernen
+              </Button>
             </Menu.Target>
 
             <Menu.Dropdown>
@@ -31,7 +34,9 @@ function App() {
           </Menu>
           <Menu shadow="md" width={200}>
             <Menu.Target>
-              <Button variant="default">Prüfung</Button>
+              <Button variant="default" rightSection={<ChevronDownIcon width={20} />}>
+                Prüfung
+              </Button>
             </Menu.Target>
 
             <Menu.Dropdown>
@@ -44,6 +49,9 @@ function App() {
             </Menu.Dropdown>
           </Menu>
         </Box>
+        <UnstyledButton component={NavLink} to="https://github.com/dawosch/fishexam" target="_blank" style={{ display: 'flex', alignSelf: 'center' }}>
+          <img src="/fishexam/github.svg" width={24} />
+        </UnstyledButton>
       </AppShell.Header>
 
       <AppShell.Main>
